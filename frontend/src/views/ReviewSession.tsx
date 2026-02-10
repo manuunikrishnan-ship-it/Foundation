@@ -88,16 +88,16 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
         total: totalScore
       },
       notes,
-      session_data: { results, currentIndex, seconds, code, language, practicalLink }
+      sessionData: { results, currentIndex, seconds, code, language, practicalLink }
     }
 
-    const promise = fetch(`${API_URL}/reviews/${review.id}/`, { // Note trailing slash for Django
-      method: 'PUT',
+    const promise = fetch(`${API_URL}/reviews/${review.id}/`, { 
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(finalState)
     })
     .then(res => {
-      if (!res.ok) throw new Error()
+      if (!res.ok) throw new Error('API Error')
       localStorage.removeItem(`review_session_${review.id}`)
       onComplete()
     })
@@ -470,7 +470,17 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
             <span style={{ fontWeight: 800, fontSize: '18px', color: isPassed ? 'var(--success)' : 'var(--warning)' }}>{totalScore.toFixed(1)}%</span>
           </div>
           <button 
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-8 h-[44px] rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-500/20 flex items-center gap-2" 
+            className="btn btn-primary" 
+            style={{ 
+              backgroundColor: 'var(--primary)', 
+              padding: '0 32px', 
+              borderRadius: '12px',
+              height: '48px',
+              fontSize: '15px',
+              fontWeight: 800,
+              boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
+              border: 'none'
+            }} 
             onClick={handleSubmit}
           >
             Submit Review
