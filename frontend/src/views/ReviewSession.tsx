@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { 
   ChevronLeft, CheckCircle, AlertCircle, XCircle, 
-  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Code, FileText, Copy, ClipboardList, ClipboardCheck
+  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Code, FileText, Copy, ClipboardCheck
 } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import type { ScheduledReview, Question, ReviewStatus, QuestionResult } from '../types'
@@ -212,49 +212,62 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
 
   if (showFeedbackModal) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.85)' }}>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(2, 6, 23, 0.8)' }}>
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="w-full max-w-lg bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+          className="w-full max-w-2xl bg-white border border-slate-200 rounded-[24px] shadow-2xl overflow-hidden"
         >
-          <div className="p-8 pb-4">
-             <div className="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-indigo-500 mb-6 shadow-sm mx-auto">
-              <ClipboardCheck size={28} strokeWidth={2} />
+          <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div>
+              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Final Assessment Notes</h2>
+              <p className="text-slate-500 text-sm mt-1">Review and refine your observations before finalizing the report.</p>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2 text-center tracking-tight">Final Feedback</h2>
-            <p className="text-zinc-400 text-sm text-center leading-relaxed">
-              Refine your notes before generating the report. This will be shared with the hiring manager.
-            </p>
+            <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 border border-indigo-100">
+              <ClipboardCheck size={24} />
+            </div>
           </div>
 
-          <div className="p-8 pt-2 flex flex-col gap-6">
-            <div className="relative">
-               <div className="flex justify-between items-center mb-2 px-1">
-                <label className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest">Reviewer Notes</label>
-                <span className="text-[10px] font-medium text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">MARKDOWN</span>
+          <div className="p-8">
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-3">
+                <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-1">Evaluation Commentary</label>
+                <div className="flex items-center gap-2 text-[10px] font-medium text-slate-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  Auto-saving...
+                </div>
               </div>
               <textarea 
-                className="w-full h-48 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 text-zinc-200 placeholder:text-zinc-600 focus:bg-zinc-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none resize-none text-sm transition-all"
-                placeholder="Enter your detailed observations here..."
+                className="w-full h-64 p-5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 placeholder:text-slate-400 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none resize-none text-[15px] leading-relaxed transition-all shadow-inner"
+                placeholder="Detail the student's performance, areas of excellence, and specific technical gaps identified during this session..."
                 value={notes}
                 onChange={e => setNotes(e.target.value)}
                 autoFocus
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex items-center gap-4 bg-amber-50/50 border border-amber-100/50 p-4 rounded-xl mb-8">
+              <div className="p-2 bg-amber-100 rounded-lg text-amber-700">
+                <AlertCircle size={18} />
+              </div>
+              <p className="text-xs text-amber-800 leading-normal">
+                <b>Internal Policy:</b> Ensure feedback is constructive and includes specific examples from the practical assessment.
+              </p>
+            </div>
+
+            <div className="flex gap-3">
               <button 
-                className="py-3 rounded-xl text-sm font-semibold text-zinc-400 hover:bg-zinc-900 transition-colors"
+                className="flex-1 py-4 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors border border-slate-200"
                 onClick={() => setShowFeedbackModal(false)}
               >
-                Back
+                Back to Session
               </button>
               <button 
-                className="py-3 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 active:scale-95 transition-all shadow-lg shadow-indigo-500/20"
+                className="flex-[2] py-4 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition-all shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2"
                 onClick={handleGenerateReport}
               >
-                Generate Report
+                Finalize Evaluation Report
+                <ArrowRight size={18} />
               </button>
             </div>
           </div>
@@ -266,95 +279,166 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
   if (showResult) {
     const wrongQs = moduleQuestions.filter(q => results.find(r => r.questionId === q.id)?.status === 'wrong')
     const improveQs = moduleQuestions.filter(q => results.find(r => r.questionId === q.id)?.status === 'need-improvement')
+    const perfectQs = moduleQuestions.filter(q => results.find(r => r.questionId === q.id)?.status === 'answered')
 
     return (
-      <div className="fixed inset-0 z-40 bg-slate-50 flex items-center justify-center overflow-y-auto py-10">
+      <div className="fixed inset-0 z-50 bg-[#f8fafc] flex items-center justify-center overflow-y-auto p-6">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl shadow-xl w-[600px] max-w-[95vw] overflow-hidden flex flex-col my-auto"
+          className="bg-white border border-slate-200 rounded-[32px] shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col"
         >
-          <div className={`p-8 flex flex-col items-center justify-center text-center ${isPassed ? 'bg-green-50' : 'bg-red-50'}`}>
-            <div 
-              style={{ 
-                width: '64px', height: '64px', borderRadius: '50%', 
-                background: isPassed ? 'var(--success)' : 'var(--danger)',
-                color: 'white',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                marginBottom: '16px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-              }}
-            >
-              {isPassed ? <CheckCircle size={32} /> : <XCircle size={32} />}
+          {/* Executive Header */}
+          <div className={`p-10 text-white relative overflow-hidden ${isPassed ? 'bg-emerald-600' : 'bg-rose-600'}`}>
+            <div className="absolute top-0 right-0 p-12 opacity-10 rotate-12">
+              {isPassed ? <CheckCircle size={180} /> : <XCircle size={180} />}
             </div>
-            <h1 className="text-3xl font-bold mb-2 text-slate-900">{isPassed ? 'Evaluation Passed' : 'Evaluation Failed'}</h1>
-            <p className="text-slate-500 font-medium">
-              {review.studentName} has {isPassed ? 'successfully completed' : 'failed'} {review.module}.
-            </p>
+            
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">
+                  Assessment Complete
+                </div>
+                <h1 className="text-4xl font-extrabold tracking-tight mb-2">
+                  {isPassed ? 'Certification Passed' : 'Assessment Failed'}
+                </h1>
+                <p className="text-white/80 font-medium">
+                  {review.studentName} • {review.module} • {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </p>
+              </div>
+              <div className="flex flex-col items-end">
+                <div className="text-white/60 text-xs font-bold uppercase tracking-tighter mb-1">AGGREGATE PROFICIENCY</div>
+                <div className="text-6xl font-black">{totalScore.toFixed(0)}<span className="text-2xl opacity-50">%</span></div>
+              </div>
+            </div>
           </div>
 
-          <div className="p-8 flex flex-col gap-6 text-center">
-            <div className="grid grid-cols-3 gap-4">
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                <span className="text-xs font-bold text-slate-400 block mb-1">THEORETICAL</span>
-                <span className="text-xl font-bold text-slate-700">{((stats.theoretical / stats.maxTheoretical) * 70).toFixed(1)}%</span>
+          <div className="p-10 flex flex-col gap-10">
+            {/* Score Distribution */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { label: 'Theoretical Aptitude', value: (stats.theoretical / stats.maxTheoretical) * 70, max: 70, color: 'indigo' },
+                { label: 'Practical Execution', value: (practicalMark / 10) * 30, max: 30, color: 'sky' },
+                { label: 'Cumulative Index', value: totalScore, max: 100, color: isPassed ? 'emerald' : 'rose' }
+              ].map((metric, idx) => (idx < 2 ? (
+                <div key={metric.label} className="p-6 bg-slate-50 border border-slate-100 rounded-2xl">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">{metric.label}</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-extrabold text-slate-800">{metric.value.toFixed(1)}</span>
+                    <span className="text-sm font-bold text-slate-400">/ {metric.max}</span>
+                  </div>
+                  <div className="mt-4 h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(metric.value / metric.max) * 100}%` }}
+                      transition={{ delay: 0.5, duration: 1 }}
+                      className={`h-full bg-${metric.color}-500`}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div key={metric.label} className="p-6 bg-slate-900 rounded-2xl shadow-xl shadow-slate-200">
+                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">{metric.label}</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-black text-white">{metric.value.toFixed(1)}%</span>
+                  </div>
+                  <div className="mt-4 flex gap-1">
+                    {Array.from({ length: 12 }).map((_, i) => (
+                      <div 
+                        key={i} 
+                        className={`h-1.5 flex-1 rounded-full ${i/12 * 100 < metric.value ? (isPassed ? 'bg-emerald-500' : 'bg-rose-500') : 'bg-slate-700'}`} 
+                      />
+                    ))}
+                  </div>
+                </div>
+              )))}
+            </div>
+
+            {/* Performance Analysis */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider mb-5 flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                    Insight Summary
+                  </h3>
+                  <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 relative">
+                    <FileText className="absolute top-6 right-6 text-slate-200" size={20} />
+                    <p className="text-slate-600 text-sm italic leading-relaxed whitespace-pre-wrap">
+                      {notes || "No qualitative feedback provided for this session. Recommended to review theoretical segments for the next attempt."}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex flex-col gap-3">
+                   <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    Key Proficiency Strengths
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {perfectQs.length > 0 ? perfectQs.map(q => (
+                      <span key={q.id} className="text-[11px] font-bold px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-lg">
+                        {q.text.split(' ').slice(0, 4).join(' ')}...
+                      </span>
+                    )) : <span className="text-xs text-slate-400 italic">No specific strengths noted.</span>}
+                  </div>
+                </div>
               </div>
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                <span className="text-xs font-bold text-slate-400 block mb-1">PRACTICAL</span>
-                <span className="text-xl font-bold text-slate-700">{((practicalMark / 10) * 30).toFixed(1)}%</span>
-              </div>
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-center relative overflow-hidden">
-                <div className={`absolute inset-0 opacity-10 ${isPassed ? 'bg-green-500' : 'bg-red-500'}`} />
-                <span className="text-xs font-bold text-slate-400 block mb-1">TOTAL SCORE</span>
-                <span className={`text-2xl font-black ${isPassed ? 'text-green-600' : 'text-red-600'}`}>{totalScore.toFixed(1)}%</span>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider mb-5 flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+                    Critical Modules for Review
+                  </h3>
+                  <div className="space-y-3">
+                    {wrongQs.length > 0 ? wrongQs.map(q => (
+                      <div key={q.id} className="flex gap-4 p-4 bg-rose-50/50 border border-rose-100 rounded-xl">
+                        <XCircle size={18} className="text-rose-500 shrink-0" />
+                        <span className="text-xs font-semibold text-rose-900 leading-normal">{q.text}</span>
+                      </div>
+                    )) : (
+                      <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex items-center gap-3">
+                        <CheckCircle size={18} className="text-emerald-500" />
+                        <span className="text-xs font-bold text-emerald-900">Zero critical failures detected.</span>
+                      </div>
+                    )}
+                    
+                    {improveQs.length > 0 && improveQs.map(q => (
+                      <div key={q.id} className="flex gap-4 p-4 bg-amber-50/50 border border-amber-100 rounded-xl">
+                        <AlertCircle size={18} className="text-amber-500 shrink-0" />
+                        <span className="text-xs font-semibold text-amber-900 leading-normal">{q.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
-            {improveQs.length > 0 && (
-              <div>
-                <h3 className="text-xs font-bold text-amber-600 uppercase mb-3 flex items-center justify-center gap-2">
-                  <AlertCircle size={14} /> Need Improvement
-                </h3>
-                <div className="bg-amber-50 border border-amber-100 rounded-xl p-4">
-                  <ul className="space-y-1 text-sm text-slate-700 list-none">
-                    {improveQs.map(q => <li key={q.id}>{q.text}</li>)}
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            {wrongQs.length > 0 && (
-              <div>
-                <h3 className="text-xs font-bold text-red-600 uppercase mb-3 flex items-center justify-center gap-2">
-                  <XCircle size={14} /> Incorrect / Pending
-                </h3>
-                <div className="bg-red-50 border border-red-100 rounded-xl p-4">
-                  <ul className="space-y-1 text-sm text-slate-700 list-none">
-                    {wrongQs.map(q => <li key={q.id}>{q.text}</li>)}
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            <div>
-              <h3 className="text-xs font-bold text-slate-500 uppercase mb-3 flex items-center justify-center gap-2">
-                <FileText size={14} /> Feedback
-              </h3>
-              <div className="relative group">
-                <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 text-sm text-slate-700 italic min-h-[100px] whitespace-pre-wrap text-center flex items-center justify-center">
-                  {notes || "No additional feedback provided."}
-                </div>
-                <button 
-                  onClick={copyReport}
-                  className="absolute top-2 right-2 p-2 bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:text-indigo-600 transition-all opacity-0 group-hover:opacity-100 shadow-sm flex items-center gap-2 text-xs font-bold"
-                >
-                  <ClipboardList size={14} />
-                </button>
-              </div>
+            {/* Footer Actions */}
+            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-4">
+              <button 
+                onClick={copyReport}
+                className="btn border-slate-200 hover:bg-slate-50 text-slate-600 font-bold px-8"
+              >
+                <Copy size={18} />
+                Copy Report
+              </button>
+              <button 
+                onClick={() => window.print()}
+                className="btn border-slate-200 hover:bg-slate-50 text-slate-600 font-bold px-8"
+              >
+                <ExternalLink size={18} />
+                Export to PDF
+              </button>
+              <div className="sm:ml-auto" />
+              <button 
+                className="bg-slate-900 hover:bg-black text-white font-bold h-[52px] px-10 rounded-xl transition-all active:scale-95 shadow-lg shadow-slate-200" 
+                onClick={handleFinishSession}
+              >
+                Exit to Dashboard
+              </button>
             </div>
-
-            <button className="btn btn-primary w-full py-3" onClick={handleFinishSession}>
-              Return to Dashboard
-            </button>
           </div>
         </motion.div>
       </div>
@@ -388,7 +472,13 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>OVERALL SCORE</span>
             <span style={{ fontWeight: 800, fontSize: '18px', color: isPassed ? 'var(--success)' : 'var(--warning)' }}>{totalScore.toFixed(1)}%</span>
           </div>
-          <button className="btn btn-primary" onClick={handleSubmit}>Submit Review</button>
+          <button 
+            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-8 h-[44px] rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-500/20 flex items-center gap-2" 
+            onClick={handleSubmit}
+          >
+            Submit Review
+            <ArrowRight size={18} />
+          </button>
         </div>
       </header>
 
