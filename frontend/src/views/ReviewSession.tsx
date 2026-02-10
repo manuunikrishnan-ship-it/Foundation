@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { 
   ChevronLeft, CheckCircle, AlertCircle, XCircle, 
-  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Code, FileText, Copy, ClipboardCheck
+  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Pause, Code, FileText, Copy, ClipboardCheck
 } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import type { ScheduledReview, Question, ReviewStatus, QuestionResult } from '../types'
@@ -48,6 +48,7 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
   const [showResult, setShowResult] = useState(false)
   const [showFeedbackModal, setShowFeedbackModal] = useState(false)
   const [linkError, setLinkError] = useState(false)
+  const [isPaused, setIsPaused] = useState(() => getSaved('isPaused', false))
   
   // Compiler State
   const [language, setLanguage] = useState<'java' | 'c'>(() => getSaved('language', 'c'))
@@ -68,15 +69,16 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
   const currentResult = results.find(r => r.questionId === currentQuestion?.id)
 
   useEffect(() => {
+    if (isPaused) return
     const timer = setInterval(() => setSeconds((s: number) => s + 1), 1000)
     return () => clearInterval(timer)
-  }, [])
+  }, [isPaused])
 
   // Persistence Effect
   useEffect(() => {
-    const state = { currentIndex, results, practicalMark, practicalLink, seconds, notes, language, code }
+    const state = { currentIndex, results, practicalMark, practicalLink, seconds, notes, language, code, isPaused }
     localStorage.setItem(`review_session_${review.id}`, JSON.stringify(state))
-  }, [currentIndex, results, practicalMark, practicalLink, seconds, notes, language, code, review.id])
+  }, [currentIndex, results, practicalMark, practicalLink, seconds, notes, language, code, isPaused, review.id])
 
   const handleFinishSession = () => {
     const finalState = {
@@ -461,11 +463,32 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
         <div style={{ flex: 1 }} />
         
         <div className="flex gap-8">
-          <div className="flex-col" style={{ alignItems: 'flex-end' }}>
-            <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>TIMER</span>
-            <span style={{ fontFamily: 'var(--terminal-font)', fontWeight: 700, fontSize: '15px' }}>{formatTime(seconds)}</span>
+          <div className="flex gap-4 items-center" style={{ background: 'var(--surface-subtle)', padding: '6px 16px', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+            <button 
+              onClick={() => setIsPaused(!isPaused)}
+              style={{ 
+                padding: '8px', 
+                borderRadius: '8px', 
+                background: isPaused ? 'var(--success-bg)' : 'var(--warning-bg)',
+                color: isPaused ? 'var(--success)' : 'var(--warning)',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease'
+              }}
+              title={isPaused ? 'Start Timer' : 'Pause Timer'}
+            >
+              {isPaused ? <Play size={16} fill="currentColor" /> : <Pause size={16} fill="currentColor" />}
+            </button>
+            <div className="flex-col" style={{ alignItems: 'flex-start' }}>
+              <span className="text-xs" style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: 800, letterSpacing: '0.05em' }}>{isPaused ? 'PAUSED' : 'ELAPSED'}</span>
+              <span style={{ fontFamily: 'var(--terminal-font)', fontWeight: 700, fontSize: '16px', color: isPaused ? 'var(--text-tertiary)' : 'var(--text-primary)' }}>{formatTime(seconds)}</span>
+            </div>
           </div>
-          <div className="flex-col" style={{ alignItems: 'flex-end' }}>
+          
+          <div className="flex-col" style={{ alignItems: 'flex-end', justifyContent: 'center' }}>
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>OVERALL SCORE</span>
             <span style={{ fontWeight: 800, fontSize: '18px', color: isPassed ? 'var(--success)' : 'var(--warning)' }}>{totalScore.toFixed(1)}%</span>
           </div>
