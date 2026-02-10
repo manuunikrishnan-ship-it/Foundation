@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { 
   ChevronLeft, CheckCircle, AlertCircle, XCircle, 
-  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Pause, Code, FileText, Copy, ClipboardCheck
+  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Pause, RotateCcw, Code, FileText, Copy, ClipboardCheck
 } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import type { ScheduledReview, Question, ReviewStatus, QuestionResult } from '../types'
@@ -481,6 +481,28 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
               title={isPaused ? 'Start Timer' : 'Pause Timer'}
             >
               {isPaused ? <Play size={16} fill="currentColor" /> : <Pause size={16} fill="currentColor" />}
+            </button>
+            <button 
+              onClick={() => {
+                if (window.confirm('Are you sure you want to reset the timer to 00:00?')) {
+                  setSeconds(0)
+                }
+              }}
+              style={{ 
+                padding: '8px', 
+                borderRadius: '8px', 
+                background: 'var(--bg-subtle)',
+                color: 'var(--text-tertiary)',
+                border: '1px solid var(--border-base)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease'
+              }}
+              title="Reset Timer"
+            >
+              <RotateCcw size={16} />
             </button>
             <div className="flex-col" style={{ alignItems: 'flex-start' }}>
               <span className="text-xs" style={{ color: 'var(--text-tertiary)', fontSize: '10px', fontWeight: 800, letterSpacing: '0.05em' }}>{isPaused ? 'PAUSED' : 'ELAPSED'}</span>
