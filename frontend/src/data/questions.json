@@ -1,0 +1,639 @@
+[
+    {
+        "id": 100,
+        "text": "What is C?",
+        "created_at": "2026-01-29 11:38:58.289882+00",
+        "module_id": 1,
+        "answer": "C is a general-purpose, procedural computer programming language supporting structured programming. Developed in 1972 by Dennis Ritchie at Bell Labs, it is known for its efficiency and is widely used for system programming (OS kernels), embedded systems, and high-performance applications."
+    },
+    {
+        "id": 101,
+        "text": "What are variables?",
+        "created_at": "2026-01-29 11:38:58.815864+00",
+        "module_id": 1,
+        "answer": "A variable is a named storage location in memory that holds a value. It acts as a container for data that can be changed during program execution. Every variable in C must be declared with a specific data type (e.g., int age = 25;)."
+    },
+    {
+        "id": 102,
+        "text": "What are data types?",
+        "created_at": "2026-01-29 11:38:59.265736+00",
+        "module_id": 1,
+        "answer": "Data types specify the type of data that a variable can store. They determine the size (memory allocation) and the operations that can be performed on the data. Common types include int, float, and char."
+    },
+    {
+        "id": 103,
+        "text": "Primitive vs. Non-Primitive",
+        "created_at": "2026-01-29 11:38:59.760951+00",
+        "module_id": 1,
+        "answer": "Primitive: Built-in types like int, char, float. They store single values. Non-Primitive: Derived types like Arrays, Structures, Unions, and Pointers. They can store multiple values or complex data."
+    },
+    {
+        "id": 104,
+        "text": "Primitive & Non-primitive Details",
+        "created_at": "2026-01-29 11:39:00.311654+00",
+        "module_id": 1,
+        "answer": "Primitive: Stored directly in the stack; predefined by the language. Non-Primitive: Usually refer to objects or collections of data; defined by the programmer."
+    },
+    {
+        "id": 105,
+        "text": "Pre and Post Increment",
+        "created_at": "2026-01-29 11:39:00.947822+00",
+        "module_id": 1,
+        "answer": "Pre-increment (++i): Increments the value first, then returns it. Post-increment (i++): Returns the current value first, then increments it."
+    },
+    {
+        "id": 106,
+        "text": "What are conditional statements?",
+        "created_at": "2026-01-29 11:39:01.4746+00",
+        "module_id": 1,
+        "answer": "Statements like if, else if, else, and switch that allow the program to make decisions and execute specific blocks of code based on conditions."
+    },
+    {
+        "id": 107,
+        "text": "Why are conditionals used?",
+        "created_at": "2026-01-29 11:39:02.186074+00",
+        "module_id": 1,
+        "answer": "They allow programs to handle different inputs, manage errors, and create complex logic paths instead of just executing code line-by-line."
+    },
+    {
+        "id": 108,
+        "text": "Difference between if and if-else",
+        "created_at": "2026-01-29 11:39:02.698688+00",
+        "module_id": 1,
+        "answer": "if executes code only if a condition is true. if-else provides an alternative block of code to execute if the initial condition is false."
+    },
+    {
+        "id": 109,
+        "text": "What is the switch statement?",
+        "created_at": "2026-01-29 11:39:03.271749+00",
+        "module_id": 1,
+        "answer": "A control statement that allows a variable to be tested for equality against a list of values (cases). It is often more readable than nested if-else blocks."
+    },
+    {
+        "id": 110,
+        "text": "What is a loop?",
+        "created_at": "2026-01-29 11:39:03.736213+00",
+        "module_id": 1,
+        "answer": "A sequence of instructions that is continually repeated until a certain condition is reached."
+    },
+    {
+        "id": 111,
+        "text": "Types of loops",
+        "created_at": "2026-01-29 11:39:04.235505+00",
+        "module_id": 1,
+        "answer": "1. for: Used when iterations are known. 2. while: Checks condition before execution. 3. do-while: Executes at least once before checking condition."
+    },
+    {
+        "id": 112,
+        "text": "Break vs Continue",
+        "created_at": "2026-01-29 11:39:04.679147+00",
+        "module_id": 1,
+        "answer": "break: Exits the loop entirely. continue: Skips the rest of the current iteration and jumps to the next one."
+    },
+    {
+        "id": 113,
+        "text": "Functions and Types",
+        "created_at": "2026-01-29 11:39:05.253556+00",
+        "module_id": 1,
+        "answer": "A function is a block of code which only runs when it is called. Types: 1. Standard Library (e.g., printf) 2. User-defined (created by the programmer)."
+    },
+    {
+        "id": 190,
+        "text": "Use For Loop",
+        "created_at": "2026-01-29 11:57:01.118561+00",
+        "module_id": 1,
+        "answer": null
+    },
+    {
+        "id": 114,
+        "text": "What is C?",
+        "created_at": "2026-01-29 11:42:04.250933+00",
+        "module_id": 2,
+        "answer": "C is a general-purpose, procedural computer programming language supporting structured programming. Developed in 1972 by Dennis Ritchie at Bell Labs, it is known for its efficiency and is widely used for system programming (OS kernels), embedded systems, and high-performance applications."
+    },
+    {
+        "id": 115,
+        "text": "What are variables?",
+        "created_at": "2026-01-29 11:42:04.744668+00",
+        "module_id": 2,
+        "answer": "A variable is a named storage location in memory that holds a value. It acts as a container for data that can be changed during program execution. Every variable in C must be declared with a specific data type (e.g., int age = 25;)."
+    },
+    {
+        "id": 116,
+        "text": "What are data types?",
+        "created_at": "2026-01-29 11:42:05.331709+00",
+        "module_id": 2,
+        "answer": "Data types specify the type of data that a variable can store. They determine the size (memory allocation) and the operations that can be performed on the data. Common types include int, float, and char."
+    },
+    {
+        "id": 117,
+        "text": "Primitive vs. Non-Primitive",
+        "created_at": "2026-01-29 11:42:05.971714+00",
+        "module_id": 2,
+        "answer": "Primitive: Built-in types like int, char, float. They store single values. Non-Primitive: Derived types like Arrays, Structures, Unions, and Pointers. They can store multiple values or complex data."
+    },
+    {
+        "id": 118,
+        "text": "Primitive & Non-primitive Details",
+        "created_at": "2026-01-29 11:42:06.821304+00",
+        "module_id": 2,
+        "answer": "Primitive: Stored directly in the stack; predefined by the language. Non-Primitive: Usually refer to objects or collections of data; defined by the programmer."
+    },
+    {
+        "id": 119,
+        "text": "Pre and Post Increment",
+        "created_at": "2026-01-29 11:42:07.336072+00",
+        "module_id": 2,
+        "answer": "Pre-increment (++i): Increments the value first, then returns it. Post-increment (i++): Returns the current value first, then increments it."
+    },
+    {
+        "id": 120,
+        "text": "What are conditional statements?",
+        "created_at": "2026-01-29 11:42:07.870499+00",
+        "module_id": 2,
+        "answer": "Statements like if, else if, else, and switch that allow the program to make decisions and execute specific blocks of code based on conditions."
+    },
+    {
+        "id": 121,
+        "text": "Why are conditionals used?",
+        "created_at": "2026-01-29 11:42:08.914844+00",
+        "module_id": 2,
+        "answer": "They allow programs to handle different inputs, manage errors, and create complex logic paths instead of just executing code line-by-line."
+    },
+    {
+        "id": 122,
+        "text": "Difference between if and if-else",
+        "created_at": "2026-01-29 11:42:09.493835+00",
+        "module_id": 2,
+        "answer": "if executes code only if a condition is true. if-else provides an alternative block of code to execute if the initial condition is false."
+    },
+    {
+        "id": 123,
+        "text": "What is the switch statement?",
+        "created_at": "2026-01-29 11:42:10.002665+00",
+        "module_id": 2,
+        "answer": "A control statement that allows a variable to be tested for equality against a list of values (cases). It is often more readable than nested if-else blocks."
+    },
+    {
+        "id": 124,
+        "text": "What is a loop?",
+        "created_at": "2026-01-29 11:42:10.55411+00",
+        "module_id": 2,
+        "answer": "A sequence of instructions that is continually repeated until a certain condition is reached."
+    },
+    {
+        "id": 125,
+        "text": "Types of loops",
+        "created_at": "2026-01-29 11:42:11.100846+00",
+        "module_id": 2,
+        "answer": "1. for: Used when iterations are known. 2. while: Checks condition before execution. 3. do-while: Executes at least once before checking condition."
+    },
+    {
+        "id": 126,
+        "text": "Break vs Continue",
+        "created_at": "2026-01-29 11:42:11.669096+00",
+        "module_id": 2,
+        "answer": "break: Exits the loop entirely. continue: Skips the rest of the current iteration and jumps to the next one."
+    },
+    {
+        "id": 127,
+        "text": "Functions and Types",
+        "created_at": "2026-01-29 11:42:12.130344+00",
+        "module_id": 2,
+        "answer": "A function is a block of code which only runs when it is called. Types: 1. Standard Library (e.g., printf) 2. User-defined (created by the programmer)."
+    },
+    {
+        "id": 128,
+        "text": "How do you find the size of a data type without using sizeof?",
+        "created_at": "2026-01-29 11:42:12.669095+00",
+        "module_id": 2,
+        "answer": "Use pointer arithmetic: (char*)(&var + 1) - (char*)(&var). By incrementing a pointer to the variable and subtracting the original address, you get the size in bytes."
+    },
+    {
+        "id": 129,
+        "text": "Difference between Static and Dynamic memory allocation?",
+        "created_at": "2026-01-29 11:42:13.165727+00",
+        "module_id": 2,
+        "answer": "Static: Allocated at compile-time on the Stack; size cannot change. Dynamic: Allocated at runtime on the Heap using malloc()/calloc(); size can be adjusted with realloc()."
+    },
+    {
+        "id": 130,
+        "text": "What is the static keyword?",
+        "created_at": "2026-01-29 11:42:13.78263+00",
+        "module_id": 2,
+        "answer": "1. Inside function: Retains value between calls. 2. Global: Limits visibility to the current file only (internal linkage)."
+    },
+    {
+        "id": 131,
+        "text": "What is a Function Pointer?",
+        "created_at": "2026-01-29 11:42:14.520776+00",
+        "module_id": 2,
+        "answer": "A variable that stores the address of a function, which can then be called through that pointer. Useful for callbacks and task scheduling."
+    },
+    {
+        "id": 132,
+        "text": "Difference between struct and union?",
+        "created_at": "2026-01-29 11:42:14.996271+00",
+        "module_id": 2,
+        "answer": "Struct: Each member has its own memory location; total size is the sum of members. Union: All members share the same memory; size is the size of the largest member."
+    },
+    {
+        "id": 133,
+        "text": "Can switch handle strings or floats?",
+        "created_at": "2026-01-29 11:42:15.52032+00",
+        "module_id": 2,
+        "answer": "No. C switch only accepts integral types (int, char, enum). For strings or floats, you must use if-else chains."
+    },
+    {
+        "id": 134,
+        "text": "Difference between array and pointer?",
+        "created_at": "2026-01-29 11:42:15.991319+00",
+        "module_id": 2,
+        "answer": "An array is a constant pointer to a block of memory; a pointer is a variable that can hold any address and be reassigned."
+    },
+    {
+        "id": 135,
+        "text": "What is JVM, JRE, and JDK?",
+        "created_at": "2026-01-29 11:46:43.86177+00",
+        "module_id": 3,
+        "answer": "JDK: Tools to develop Java apps. JRE: Environment to run Java apps. JVM: The engine that executes Java bytecode on any machine."
+    },
+    {
+        "id": 136,
+        "text": "Why is Java not 100% Object-Oriented?",
+        "created_at": "2026-01-29 11:46:44.351837+00",
+        "module_id": 3,
+        "answer": "Because it supports primitive data types (like int, float, char) which are not objects."
+    },
+    {
+        "id": 137,
+        "text": "What are Wrapper Classes?",
+        "created_at": "2026-01-29 11:46:44.816261+00",
+        "module_id": 3,
+        "answer": "Classes that allow primitive types to be accessed as objects (e.g., Integer for int). They are essential for use in Collections."
+    },
+    {
+        "id": 138,
+        "text": "Difference between == and .equals()?",
+        "created_at": "2026-01-29 11:46:45.251915+00",
+        "module_id": 3,
+        "answer": "== checks if two references point to the same memory location. .equals() checks if the content/values of the objects are the same."
+    },
+    {
+        "id": 139,
+        "text": "What is the Stack vs. Heap?",
+        "created_at": "2026-01-29 11:46:45.715594+00",
+        "module_id": 3,
+        "answer": "Stack: Stores local variables and function calls (temporary). Heap: Stores objects and instance variables (longer-lived)."
+    },
+    {
+        "id": 140,
+        "text": "What are the 4 main pillars of OOP?",
+        "created_at": "2026-01-29 11:46:46.186309+00",
+        "module_id": 3,
+        "answer": "1. Abstraction: Hiding complexity. 2. Encapsulation: Data hiding. 3. Inheritance: Reusing code. 4. Polymorphism: Many forms."
+    },
+    {
+        "id": 141,
+        "text": "How do you implement Encapsulation?",
+        "created_at": "2026-01-29 11:46:46.680802+00",
+        "module_id": 3,
+        "answer": "By making class fields private and providing public getter and setter methods to control access."
+    },
+    {
+        "id": 142,
+        "text": "What is the super keyword?",
+        "created_at": "2026-01-29 11:46:47.135049+00",
+        "module_id": 3,
+        "answer": "A reference variable used to access parent class constructors, methods, or variables."
+    },
+    {
+        "id": 143,
+        "text": "Method Overloading vs. Overriding?",
+        "created_at": "2026-01-29 11:46:47.575232+00",
+        "module_id": 3,
+        "answer": "Overloading: Same method name, different parameters (Compile-time). Overriding: Child class changes the behavior of a parent method (Runtime)."
+    },
+    {
+        "id": 144,
+        "text": "Can a Constructor be inherited?",
+        "created_at": "2026-01-29 11:46:48.043421+00",
+        "module_id": 3,
+        "answer": "No, constructors are not inherited, but a child class constructor can call the parent constructor using super()."
+    },
+    {
+        "id": 145,
+        "text": "What does static mean in Java?",
+        "created_at": "2026-01-29 11:46:48.539396+00",
+        "module_id": 3,
+        "answer": "It belongs to the class itself rather than a specific object instance. It is shared across all instances."
+    },
+    {
+        "id": 146,
+        "text": "Difference between final, finally, and finalize?",
+        "created_at": "2026-01-29 11:46:48.993554+00",
+        "module_id": 3,
+        "answer": "final: Constant/cannot change. finally: Block that always executes after try-catch. finalize: Method used by Garbage Collector before destroying an object."
+    },
+    {
+        "id": 147,
+        "text": "Why are Strings immutable in Java?",
+        "created_at": "2026-01-29 11:46:49.463103+00",
+        "module_id": 3,
+        "answer": "For security, caching (String Pool), and synchronization. Once created, a String's value cannot be altered."
+    },
+    {
+        "id": 148,
+        "text": "Checked vs. Unchecked Exceptions?",
+        "created_at": "2026-01-29 11:46:49.909517+00",
+        "module_id": 3,
+        "answer": "Checked: Verified at compile-time (e.g., IOException). Unchecked: Verified at runtime (e.g., NullPointerException)."
+    },
+    {
+        "id": 149,
+        "text": "What is Garbage Collection?",
+        "created_at": "2026-01-29 11:46:50.383381+00",
+        "module_id": 3,
+        "answer": "An automatic process in Java that identifies and deletes objects that are no longer reachable in memory to free up space."
+    },
+    {
+        "id": 150,
+        "text": "What is the main method signature?",
+        "created_at": "2026-01-29 11:46:50.861235+00",
+        "module_id": 3,
+        "answer": "public static void main(String[] args). It is the entry point of any Java program."
+    },
+    {
+        "id": 151,
+        "text": "What is a Constructor?",
+        "created_at": "2026-01-29 11:46:51.335799+00",
+        "module_id": 3,
+        "answer": "A special method used to initialize objects. It has the same name as the class and no return type."
+    },
+    {
+        "id": 152,
+        "text": "What is the JIT Compiler?",
+        "created_at": "2026-01-29 11:46:51.850594+00",
+        "module_id": 3,
+        "answer": "Just-In-Time compiler. It improves performance by compiling bytecode into native machine code at runtime."
+    },
+    {
+        "id": 153,
+        "text": "Difference between a Class and an Object?",
+        "created_at": "2026-01-29 11:46:52.522464+00",
+        "module_id": 3,
+        "answer": "A class is a blueprint or template; an object is an instance of that class created in memory."
+    },
+    {
+        "id": 154,
+        "text": "What is C?",
+        "created_at": "2026-01-29 11:46:54.734811+00",
+        "module_id": 4,
+        "answer": "C is a general-purpose, procedural computer programming language supporting structured programming. Developed in 1972 by Dennis Ritchie at Bell Labs, it is known for its efficiency and is widely used for system programming (OS kernels), embedded systems, and high-performance applications."
+    },
+    {
+        "id": 155,
+        "text": "What are variables?",
+        "created_at": "2026-01-29 11:46:55.217038+00",
+        "module_id": 4,
+        "answer": "A variable is a named storage location in memory that holds a value. It acts as a container for data that can be changed during program execution. Every variable in C must be declared with a specific data type (e.g., int age = 25;)."
+    },
+    {
+        "id": 156,
+        "text": "What are data types?",
+        "created_at": "2026-01-29 11:46:55.668226+00",
+        "module_id": 4,
+        "answer": "Data types specify the type of data that a variable can store. They determine the size (memory allocation) and the operations that can be performed on the data. Common types include int, float, and char."
+    },
+    {
+        "id": 157,
+        "text": "Primitive vs. Non-Primitive",
+        "created_at": "2026-01-29 11:46:56.143337+00",
+        "module_id": 4,
+        "answer": "Primitive: Built-in types like int, char, float. They store single values. Non-Primitive: Derived types like Arrays, Structures, Unions, and Pointers. They can store multiple values or complex data."
+    },
+    {
+        "id": 158,
+        "text": "Primitive & Non-primitive Details",
+        "created_at": "2026-01-29 11:46:56.678379+00",
+        "module_id": 4,
+        "answer": "Primitive: Stored directly in the stack; predefined by the language. Non-Primitive: Usually refer to objects or collections of data; defined by the programmer."
+    },
+    {
+        "id": 159,
+        "text": "Pre and Post Increment",
+        "created_at": "2026-01-29 11:46:57.165111+00",
+        "module_id": 4,
+        "answer": "Pre-increment (++i): Increments the value first, then returns it. Post-increment (i++): Returns the current value first, then increments it."
+    },
+    {
+        "id": 160,
+        "text": "What are conditional statements?",
+        "created_at": "2026-01-29 11:46:57.580616+00",
+        "module_id": 4,
+        "answer": "Statements like if, else if, else, and switch that allow the program to make decisions and execute specific blocks of code based on conditions."
+    },
+    {
+        "id": 161,
+        "text": "Why are conditionals used?",
+        "created_at": "2026-01-29 11:46:58.046335+00",
+        "module_id": 4,
+        "answer": "They allow programs to handle different inputs, manage errors, and create complex logic paths instead of just executing code line-by-line."
+    },
+    {
+        "id": 162,
+        "text": "Difference between if and if-else",
+        "created_at": "2026-01-29 11:46:58.460004+00",
+        "module_id": 4,
+        "answer": "if executes code only if a condition is true. if-else provides an alternative block of code to execute if the initial condition is false."
+    },
+    {
+        "id": 163,
+        "text": "What is the switch statement?",
+        "created_at": "2026-01-29 11:46:58.995184+00",
+        "module_id": 4,
+        "answer": "A control statement that allows a variable to be tested for equality against a list of values (cases). It is often more readable than nested if-else blocks."
+    },
+    {
+        "id": 164,
+        "text": "What is a loop?",
+        "created_at": "2026-01-29 11:46:59.527377+00",
+        "module_id": 4,
+        "answer": "A sequence of instructions that is continually repeated until a certain condition is reached."
+    },
+    {
+        "id": 165,
+        "text": "Types of loops",
+        "created_at": "2026-01-29 11:47:00.050972+00",
+        "module_id": 4,
+        "answer": "1. for: Used when iterations are known. 2. while: Checks condition before execution. 3. do-while: Executes at least once before checking condition."
+    },
+    {
+        "id": 166,
+        "text": "Break vs Continue",
+        "created_at": "2026-01-29 11:47:00.548162+00",
+        "module_id": 4,
+        "answer": "break: Exits the loop entirely. continue: Skips the rest of the current iteration and jumps to the next one."
+    },
+    {
+        "id": 167,
+        "text": "Functions and Types",
+        "created_at": "2026-01-29 11:47:01.048668+00",
+        "module_id": 4,
+        "answer": "A function is a block of code which only runs when it is called. Types: 1. Standard Library (e.g., printf) 2. User-defined (created by the programmer)."
+    },
+    {
+        "id": 168,
+        "text": "How do you find the size of a data type without using sizeof?",
+        "created_at": "2026-01-29 11:47:01.560656+00",
+        "module_id": 4,
+        "answer": "Use pointer arithmetic: (char*)(&var + 1) - (char*)(&var). By incrementing a pointer to the variable and subtracting the original address, you get the size in bytes."
+    },
+    {
+        "id": 169,
+        "text": "Difference between Static and Dynamic memory allocation?",
+        "created_at": "2026-01-29 11:47:02.041573+00",
+        "module_id": 4,
+        "answer": "Static: Allocated at compile-time on the Stack; size cannot change. Dynamic: Allocated at runtime on the Heap using malloc()/calloc(); size can be adjusted with realloc()."
+    },
+    {
+        "id": 170,
+        "text": "What is the static keyword?",
+        "created_at": "2026-01-29 11:47:02.464252+00",
+        "module_id": 4,
+        "answer": "1. Inside function: Retains value between calls. 2. Global: Limits visibility to the current file only (internal linkage)."
+    },
+    {
+        "id": 171,
+        "text": "What is a Function Pointer?",
+        "created_at": "2026-01-29 11:47:02.950466+00",
+        "module_id": 4,
+        "answer": "A variable that stores the address of a function, which can then be called through that pointer. Useful for callbacks and task scheduling."
+    },
+    {
+        "id": 172,
+        "text": "Difference between struct and union?",
+        "created_at": "2026-01-29 11:47:03.498114+00",
+        "module_id": 4,
+        "answer": "Struct: Each member has its own memory location; total size is the sum of members. Union: All members share the same memory; size is the size of the largest member."
+    },
+    {
+        "id": 173,
+        "text": "Can switch handle strings or floats?",
+        "created_at": "2026-01-29 11:47:03.941786+00",
+        "module_id": 4,
+        "answer": "No. C switch only accepts integral types (int, char, enum). For strings or floats, you must use if-else chains."
+    },
+    {
+        "id": 174,
+        "text": "Difference between array and pointer?",
+        "created_at": "2026-01-29 11:47:04.513546+00",
+        "module_id": 4,
+        "answer": "An array is a constant pointer to a block of memory; a pointer is a variable that can hold any address and be reassigned."
+    },
+    {
+        "id": 175,
+        "text": "What is JVM, JRE, and JDK?",
+        "created_at": "2026-01-29 11:47:05.013555+00",
+        "module_id": 4,
+        "answer": "JDK: Tools to develop Java apps. JRE: Environment to run Java apps. JVM: The engine that executes Java bytecode on any machine."
+    },
+    {
+        "id": 176,
+        "text": "Why is Java not 100% Object-Oriented?",
+        "created_at": "2026-01-29 11:47:05.530961+00",
+        "module_id": 4,
+        "answer": "Because it supports primitive data types (like int, float, char) which are not objects."
+    },
+    {
+        "id": 177,
+        "text": "What are Wrapper Classes?",
+        "created_at": "2026-01-29 11:47:06.060541+00",
+        "module_id": 4,
+        "answer": "Classes that allow primitive types to be accessed as objects (e.g., Integer for int). They are essential for use in Collections."
+    },
+    {
+        "id": 178,
+        "text": "Difference between == and .equals()?",
+        "created_at": "2026-01-29 11:47:06.548228+00",
+        "module_id": 4,
+        "answer": "== checks if two references point to the same memory location. .equals() checks if the content/values of the objects are the same."
+    },
+    {
+        "id": 179,
+        "text": "What is the Stack vs. Heap?",
+        "created_at": "2026-01-29 11:47:07.058284+00",
+        "module_id": 4,
+        "answer": "Stack: Stores local variables and function calls (temporary). Heap: Stores objects and instance variables (longer-lived)."
+    },
+    {
+        "id": 180,
+        "text": "What are the 4 main pillars of OOP?",
+        "created_at": "2026-01-29 11:47:07.563524+00",
+        "module_id": 4,
+        "answer": "1. Abstraction: Hiding complexity. 2. Encapsulation: Data hiding. 3. Inheritance: Reusing code. 4. Polymorphism: Many forms."
+    },
+    {
+        "id": 181,
+        "text": "How do you implement Encapsulation?",
+        "created_at": "2026-01-29 11:47:08.081741+00",
+        "module_id": 4,
+        "answer": "By making class fields private and providing public getter and setter methods to control access."
+    },
+    {
+        "id": 182,
+        "text": "What is the super keyword?",
+        "created_at": "2026-01-29 11:47:08.581852+00",
+        "module_id": 4,
+        "answer": "A reference variable used to access parent class constructors, methods, or variables."
+    },
+    {
+        "id": 183,
+        "text": "Method Overloading vs. Overriding?",
+        "created_at": "2026-01-29 11:47:09.021125+00",
+        "module_id": 4,
+        "answer": "Overloading: Same method name, different parameters (Compile-time). Overriding: Child class changes the behavior of a parent method (Runtime)."
+    },
+    {
+        "id": 184,
+        "text": "Can a Constructor be inherited?",
+        "created_at": "2026-01-29 11:47:09.50275+00",
+        "module_id": 4,
+        "answer": "No, constructors are not inherited, but a child class constructor can call the parent constructor using super()."
+    },
+    {
+        "id": 185,
+        "text": "What does static mean in Java?",
+        "created_at": "2026-01-29 11:47:09.946649+00",
+        "module_id": 4,
+        "answer": "It belongs to the class itself rather than a specific object instance. It is shared across all instances."
+    },
+    {
+        "id": 186,
+        "text": "Difference between final, finally, and finalize?",
+        "created_at": "2026-01-29 11:47:10.37618+00",
+        "module_id": 4,
+        "answer": "final: Constant/cannot change. finally: Block that always executes after try-catch. finalize: Method used by Garbage Collector before destroying an object."
+    },
+    {
+        "id": 187,
+        "text": "Why are Strings immutable in Java?",
+        "created_at": "2026-01-29 11:47:10.849744+00",
+        "module_id": 4,
+        "answer": "For security, caching (String Pool), and synchronization. Once created, a String's value cannot be altered."
+    },
+    {
+        "id": 188,
+        "text": "Checked vs. Unchecked Exceptions?",
+        "created_at": "2026-01-29 11:47:11.350535+00",
+        "module_id": 4,
+        "answer": "Checked: Verified at compile-time (e.g., IOException). Unchecked: Verified at runtime (e.g., NullPointerException)."
+    },
+    {
+        "id": 189,
+        "text": "What is Garbage Collection?",
+        "created_at": "2026-01-29 11:47:11.916577+00",
+        "module_id": 4,
+        "answer": "An automatic process in Java that identifies and deletes objects that are no longer reachable in memory to free up space."
+    }
+]
