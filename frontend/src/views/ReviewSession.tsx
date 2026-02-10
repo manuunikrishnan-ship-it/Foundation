@@ -212,33 +212,29 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
 
   if (showFeedbackModal) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(2, 6, 23, 0.8)' }}>
+      <div className="modal-overlay">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="w-full max-w-2xl bg-white border border-slate-200 rounded-[24px] shadow-2xl overflow-hidden"
+          className="modal-content"
         >
-          <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="modal-header">
             <div>
-              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">Final Assessment Notes</h2>
-              <p className="text-slate-500 text-sm mt-1">Review and refine your observations before finalizing the report.</p>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)' }}>Final Assessment Notes</h2>
+              <p style={{ color: 'var(--text-tertiary)', fontSize: '14px', marginTop: '4px' }}>Review and refine your observations before finalizing the report.</p>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 border border-indigo-100">
+            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--primary-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)' }}>
               <ClipboardCheck size={24} />
             </div>
           </div>
 
-          <div className="p-8">
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-3">
-                <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-1">Evaluation Commentary</label>
-                <div className="flex items-center gap-2 text-[10px] font-medium text-slate-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  Auto-saving...
-                </div>
+          <div className="modal-body">
+            <div style={{ marginBottom: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'center', marginBottom: '12px' }}>
+                <label className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Evaluation Commentary</label>
               </div>
               <textarea 
-                className="w-full h-64 p-5 rounded-2xl bg-slate-50 border border-slate-200 text-slate-700 placeholder:text-slate-400 focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 outline-none resize-none text-[15px] leading-relaxed transition-all shadow-inner"
+                className="feedback-textarea"
                 placeholder="Detail the student's performance, areas of excellence, and specific technical gaps identified during this session..."
                 value={notes}
                 onChange={e => setNotes(e.target.value)}
@@ -246,24 +242,24 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
               />
             </div>
 
-            <div className="flex items-center gap-4 bg-amber-50/50 border border-amber-100/50 p-4 rounded-xl mb-8">
-              <div className="p-2 bg-amber-100 rounded-lg text-amber-700">
-                <AlertCircle size={18} />
-              </div>
-              <p className="text-xs text-amber-800 leading-normal">
+            <div style={{ display: 'flex', gap: '12px', background: '#fffbeb', border: '1px solid #fef3c7', padding: '16px', borderRadius: '12px', marginBottom: '32px' }}>
+              <AlertCircle size={18} style={{ color: '#92400e', flexShrink: 0 }} />
+              <p style={{ fontSize: '12px', color: '#92400e', lineHeight: 1.5 }}>
                 <b>Internal Policy:</b> Ensure feedback is constructive and includes specific examples from the practical assessment.
               </p>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <button 
-                className="flex-1 py-4 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors border border-slate-200"
+                className="btn btn-secondary" 
+                style={{ flex: 1, height: '52px' }}
                 onClick={() => setShowFeedbackModal(false)}
               >
                 Back to Session
               </button>
               <button 
-                className="flex-[2] py-4 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] transition-all shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2"
+                className="btn btn-primary" 
+                style={{ flex: 2, height: '52px', background: 'var(--primary)', color: 'white' }}
                 onClick={handleGenerateReport}
               >
                 Finalize Evaluation Report
@@ -282,158 +278,159 @@ const ReviewSessionView: React.FC<Props> = ({ review, onCancel, onComplete }) =>
     const perfectQs = moduleQuestions.filter(q => results.find(r => r.questionId === q.id)?.status === 'answered')
 
     return (
-      <div className="fixed inset-0 z-50 bg-[#f8fafc] flex items-center justify-center overflow-y-auto p-6">
+      <div className="result-screen-root">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white border border-slate-200 rounded-[32px] shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col"
+          className="report-container"
         >
           {/* Executive Header */}
-          <div className={`p-10 text-white relative overflow-hidden ${isPassed ? 'bg-emerald-600' : 'bg-rose-600'}`}>
-            <div className="absolute top-0 right-0 p-12 opacity-10 rotate-12">
+          <div className={`report-header ${isPassed ? 'passed' : 'failed'}`}>
+            <div style={{ position: 'absolute', top: '0', right: '0', padding: '48px', opacity: 0.1, transform: 'rotate(12deg)' }}>
               {isPassed ? <CheckCircle size={180} /> : <XCircle size={180} />}
             </div>
             
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '24px' }}>
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">
+                <span className="badge" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', marginBottom: '16px', display: 'inline-block' }}>
                   Assessment Complete
-                </div>
-                <h1 className="text-4xl font-extrabold tracking-tight mb-2">
+                </span>
+                <h1 style={{ color: 'white', fontSize: '36px', marginBottom: '8px' }}>
                   {isPassed ? 'Certification Passed' : 'Assessment Failed'}
                 </h1>
-                <p className="text-white/80 font-medium">
+                <p style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>
                   {review.studentName} • {review.module} • {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </p>
               </div>
-              <div className="flex flex-col items-end">
-                <div className="text-white/60 text-xs font-bold uppercase tracking-tighter mb-1">AGGREGATE PROFICIENCY</div>
-                <div className="text-6xl font-black">{totalScore.toFixed(0)}<span className="text-2xl opacity-50">%</span></div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '4px' }}>
+                  AGGREGATE PROFICIENCY
+                </div>
+                <div style={{ fontSize: '56px', fontWeight: 900, lineHeight: 1 }}>
+                  {totalScore.toFixed(0)}<span style={{ fontSize: '24px', opacity: 0.5 }}>%</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="p-10 flex flex-col gap-10">
+          <div className="report-content">
             {/* Score Distribution */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { label: 'Theoretical Aptitude', value: (stats.theoretical / stats.maxTheoretical) * 70, max: 70, color: 'indigo' },
-                { label: 'Practical Execution', value: (practicalMark / 10) * 30, max: 30, color: 'sky' },
-                { label: 'Cumulative Index', value: totalScore, max: 100, color: isPassed ? 'emerald' : 'rose' }
-              ].map((metric, idx) => (idx < 2 ? (
-                <div key={metric.label} className="p-6 bg-slate-50 border border-slate-100 rounded-2xl">
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">{metric.label}</span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-extrabold text-slate-800">{metric.value.toFixed(1)}</span>
-                    <span className="text-sm font-bold text-slate-400">/ {metric.max}</span>
-                  </div>
-                  <div className="mt-4 h-2 bg-slate-200 rounded-full overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      animate={{ width: `${(metric.value / metric.max) * 100}%` }}
-                      transition={{ delay: 0.5, duration: 1 }}
-                      className={`h-full bg-${metric.color}-500`}
-                    />
-                  </div>
+            <div className="score-grid">
+              <div className="score-card">
+                <span className="text-xs" style={{ color: 'var(--text-tertiary)', marginBottom: '8px', display: 'block' }}>Theoretical Aptitude</span>
+                <div className="flex" style={{ alignItems: 'baseline', gap: '4px' }}>
+                  <span style={{ fontSize: '28px', fontWeight: 800, color: 'var(--text-primary)' }}>{((stats.theoretical / stats.maxTheoretical) * 70).toFixed(1)}</span>
+                  <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-tertiary)' }}>/ 70</span>
                 </div>
-              ) : (
-                <div key={metric.label} className="p-6 bg-slate-900 rounded-2xl shadow-xl shadow-slate-200">
-                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">{metric.label}</span>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-white">{metric.value.toFixed(1)}%</span>
-                  </div>
-                  <div className="mt-4 flex gap-1">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <div 
-                        key={i} 
-                        className={`h-1.5 flex-1 rounded-full ${i/12 * 100 < metric.value ? (isPassed ? 'bg-emerald-500' : 'bg-rose-500') : 'bg-slate-700'}`} 
-                      />
-                    ))}
-                  </div>
-                </div>
-              )))}
-            </div>
-
-            {/* Performance Analysis */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider mb-5 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                    Insight Summary
-                  </h3>
-                  <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 relative">
-                    <FileText className="absolute top-6 right-6 text-slate-200" size={20} />
-                    <p className="text-slate-600 text-sm italic leading-relaxed whitespace-pre-wrap">
-                      {notes || "No qualitative feedback provided for this session. Recommended to review theoretical segments for the next attempt."}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col gap-3">
-                   <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    Key Proficiency Strengths
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {perfectQs.length > 0 ? perfectQs.map(q => (
-                      <span key={q.id} className="text-[11px] font-bold px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-lg">
-                        {q.text.split(' ').slice(0, 4).join(' ')}...
-                      </span>
-                    )) : <span className="text-xs text-slate-400 italic">No specific strengths noted.</span>}
-                  </div>
+                <div className="proficiency-bar">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${(stats.theoretical / stats.maxTheoretical) * 100}%` }}
+                    className="proficiency-fill"
+                    style={{ background: 'var(--primary)' }}
+                  />
                 </div>
               </div>
 
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider mb-5 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                    Critical Modules for Review
-                  </h3>
-                  <div className="space-y-3">
-                    {wrongQs.length > 0 ? wrongQs.map(q => (
-                      <div key={q.id} className="flex gap-4 p-4 bg-rose-50/50 border border-rose-100 rounded-xl">
-                        <XCircle size={18} className="text-rose-500 shrink-0" />
-                        <span className="text-xs font-semibold text-rose-900 leading-normal">{q.text}</span>
-                      </div>
-                    )) : (
-                      <div className="p-4 bg-emerald-50 border border-emerald-100 rounded-xl flex items-center gap-3">
-                        <CheckCircle size={18} className="text-emerald-500" />
-                        <span className="text-xs font-bold text-emerald-900">Zero critical failures detected.</span>
-                      </div>
-                    )}
-                    
-                    {improveQs.length > 0 && improveQs.map(q => (
-                      <div key={q.id} className="flex gap-4 p-4 bg-amber-50/50 border border-amber-100 rounded-xl">
-                        <AlertCircle size={18} className="text-amber-500 shrink-0" />
-                        <span className="text-xs font-semibold text-amber-900 leading-normal">{q.text}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="score-card">
+                <span className="text-xs" style={{ color: 'var(--text-tertiary)', marginBottom: '8px', display: 'block' }}>Practical Execution</span>
+                <div className="flex" style={{ alignItems: 'baseline', gap: '4px' }}>
+                  <span style={{ fontSize: '28px', fontWeight: 800, color: 'var(--text-primary)' }}>{((practicalMark / 10) * 30).toFixed(1)}</span>
+                  <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-tertiary)' }}>/ 30</span>
+                </div>
+                <div className="proficiency-bar">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${(practicalMark / 10) * 100}%` }}
+                    className="proficiency-fill"
+                    style={{ background: '#0ea5e9' }}
+                  />
+                </div>
+              </div>
+
+              <div className="score-card score-card-dark">
+                <span className="text-xs" style={{ color: 'rgba(255,255,255,0.4)', marginBottom: '8px', display: 'block' }}>Cumulative Index</span>
+                <div className="flex" style={{ alignItems: 'baseline', gap: '4px' }}>
+                  <span style={{ fontSize: '32px', fontWeight: 900 }}>{totalScore.toFixed(1)}%</span>
+                </div>
+                <div style={{ display: 'flex', gap: '4px', marginTop: '16px' }}>
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <div 
+                      key={i} 
+                      style={{ 
+                        height: '6px', flex: 1, borderRadius: '99px',
+                        background: (i + 1) * 10 <= totalScore ? (isPassed ? '#10b981' : '#f43f5e') : '#334155'
+                      }} 
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Performance Analysis */}
+            <div className="analysis-grid">
+              <div>
+                <h3 className="section-title">
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--primary)' }} />
+                  Insight Summary
+                </h3>
+                <div className="insight-box">
+                  {notes || "No qualitative feedback provided for this session."}
+                </div>
+                
+                <h3 className="section-title" style={{ marginTop: '32px' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981' }} />
+                  Key Proficiency Strengths
+                </h3>
+                <div className="tag-list">
+                  {perfectQs.length > 0 ? perfectQs.map(q => (
+                    <span key={q.id} className="strength-tag">
+                      {q.text.split(' ').slice(0, 4).join(' ')}...
+                    </span>
+                  )) : <span style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>No specific strengths noted.</span>}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="section-title">
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f43f5e' }} />
+                  Critical Modules for Review
+                </h3>
+                <div className="critical-list">
+                  {wrongQs.length > 0 ? wrongQs.map(q => (
+                    <div key={q.id} className="critical-item wrong">
+                      <XCircle size={18} style={{ flexShrink: 0 }} />
+                      <span style={{ fontSize: '13px', fontWeight: 600 }}>{q.text}</span>
+                    </div>
+                  )) : (
+                    <div className="critical-item" style={{ background: '#ecfdf5', border: '1px solid #d1fae5', color: '#065f46' }}>
+                      <CheckCircle size={18} />
+                      <span style={{ fontSize: '13px', fontWeight: 700 }}>Zero critical failures detected.</span>
+                    </div>
+                  )}
+                  
+                  {improveQs.length > 0 && improveQs.map(q => (
+                    <div key={q.id} className="critical-item improve">
+                      <AlertCircle size={18} style={{ flexShrink: 0 }} />
+                      <span style={{ fontSize: '13px', fontWeight: 600 }}>{q.text}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
             {/* Footer Actions */}
-            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={copyReport}
-                className="btn border-slate-200 hover:bg-slate-50 text-slate-600 font-bold px-8"
-              >
-                <Copy size={18} />
-                Copy Report
+            <div className="report-footer">
+              <button onClick={copyReport} className="btn btn-secondary" style={{ padding: '0 24px' }}>
+                <Copy size={18} /> Copy Report
               </button>
-              <button 
-                onClick={() => window.print()}
-                className="btn border-slate-200 hover:bg-slate-50 text-slate-600 font-bold px-8"
-              >
-                <ExternalLink size={18} />
-                Export to PDF
+              <button onClick={() => window.print()} className="btn btn-secondary" style={{ padding: '0 24px' }}>
+                <ExternalLink size={18} /> Export to PDF
               </button>
-              <div className="sm:ml-auto" />
+              <div style={{ flex: 1 }} />
               <button 
-                className="bg-slate-900 hover:bg-black text-white font-bold h-[52px] px-10 rounded-xl transition-all active:scale-95 shadow-lg shadow-slate-200" 
+                className="btn btn-primary" 
+                style={{ background: '#0f172a', color: 'white', padding: '0 32px', height: '52px' }} 
                 onClick={handleFinishSession}
               >
                 Exit to Dashboard
