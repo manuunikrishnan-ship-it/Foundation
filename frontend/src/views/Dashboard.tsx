@@ -24,7 +24,7 @@ const Dashboard: React.FC<Props> = ({ reviews, setReviews, onStartReview }) => {
     fetch(`${API_URL}/reviews/`)
       .then(res => res.json())
       .then(data => setReviews(data))
-      .catch(err => toast.error('Failed to load reviews. Backend might be down.'))
+      .catch(() => toast.error('Failed to load reviews. Backend might be down.'))
   }, [])
 
   const handleCreateReview = (e: React.FormEvent) => {

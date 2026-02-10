@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { 
   ChevronLeft, CheckCircle, AlertCircle, XCircle, 
-  SkipForward, Terminal, PenTool, ExternalLink, GraduationCap, ArrowRight, ArrowLeft, Play, Save, Code, FileText, Copy, ClipboardList, ClipboardCheck
+  SkipForward, Terminal, PenTool, ExternalLink, ArrowRight, ArrowLeft, Play, Code, FileText, Copy, ClipboardList, ClipboardCheck
 } from 'lucide-react'
 import confetti from 'canvas-confetti'
 import type { ScheduledReview, Question, ReviewStatus, QuestionResult } from '../types'
